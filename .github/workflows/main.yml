@@ -1,0 +1,22 @@
+on: [push]
+
+jobs:
+  build:
+    name: Build rust project
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: up9cloud/action-rsync@master
+        env:
+          HOST: ${{ secrets.SSH_TARGET_HOST_IP }}
+          KEY: ${{ secrets.SSH_KEY }}
+          TARGET: /data/app/log.3cm.app/
+          POST_SCRIPT: |
+            docker restart log.3cm.app
+      - name: Notify telegram
+        uses: up9cloud/action-notify@master
+        if: cancelled() == false
+        env:
+          GITHUB_JOB_STATUS: ${{ job.status }}
+          TELEGRAM_BOT_TOKEN: ${{secrets.TELEGRAM_BOT_TOKEN}}
+          TELEGRAM_CHAT_ID: ${{secrets.TELEGRAM_CHAT_ID}}

@@ -1,0 +1,9 @@
+{
+  "name": "log.3cm.app",
+  "version": "0.0.1",
+  "description": "",
+  "main": "src/index.js",
+  "sourceType": "module",
+  "author": "up9cloud (https://github.com/up9cloud)",
+  "license": "UNLICENSED"
+}
