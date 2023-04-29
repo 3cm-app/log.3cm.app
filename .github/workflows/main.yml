@@ -11,7 +11,7 @@ jobs:
           HOST: ${{ secrets.SSH_TARGET_HOST_IP }}
           KEY: ${{ secrets.SSH_KEY }}
           TARGET: /data/app/log.3cm.app/
-          MORE_ARGS: --chown=root:root
+          ARGS_MORE: --chown=root:root
           POST_SCRIPT: |
             docker restart log.3cm.app
       - name: Notify telegram
