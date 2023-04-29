@@ -2,7 +2,7 @@ on: [push]
 
 jobs:
   build:
-    name: Build rust project
+    name: Deploy
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -11,6 +11,7 @@ jobs:
           HOST: ${{ secrets.SSH_TARGET_HOST_IP }}
           KEY: ${{ secrets.SSH_KEY }}
           TARGET: /data/app/log.3cm.app/
+          MORE_ARGS: --chown=root:root
           POST_SCRIPT: |
             docker restart log.3cm.app
       - name: Notify telegram
